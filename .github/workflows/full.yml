@@ -81,6 +81,15 @@ jobs:
         make download -j50
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
+
+
+    - name: free disk space
+      run: |
+        sudo swapoff -a
+        sudo rm -f /swapfile /usr/share/dotnet /opt/ghc
+        sudo apt clean
+        docker rmi $(docker image ls -aq)
+        df -h
   
     - name: Compile Packages
       id: compile
