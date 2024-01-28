@@ -95,6 +95,10 @@ jobs:
         sudo apt clean
         docker rmi $(docker image ls -aq)
         df -h
+        
+        pushd feeds/packages/lang
+        rm -rf golang && svn co https://github.com/openwrt/packa ... t-23.05/lang/golang
+        popd
   
     - name: Compile Packages
       id: compile
